@@ -1,15 +1,13 @@
-'use client'
-import Head from 'next/head'
-import Image from 'next/image'
-// import styles from '@/styles/loginRegister/style.module.css';
-import Link from 'next/link';
+"use client";
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function Register() {
-  console.log('some error');
   return (
-    <div className="flex items-center md:h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
+    <div className="flex flex-col md:flex-row items-center md:h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
       {/* Background Color Container */}
-      <div className="flex w-full md:w-1/2  h-[600px]">
+      <div className="w-full md:w-1/2">
         <Image
           src="/images/demo-card.jpeg"
           className="align-center rounded-xl"
@@ -18,8 +16,8 @@ export default function Register() {
           height={300}
         />
       </div>
-      <div className="flex items-center justify-center w-full md:w-1/2">
-        <div className="w-full max-w-md space-y-8 bg-white p-6 rounded-lg shadow-md h-[600px]">
+      <div className="w-full md:w-1/2 flex items-center justify-center">
+        <div className="w-full max-w-md space-y-8 bg-white p-6 rounded-lg shadow-md">
           <div>
             <h1 className="text-2xl font-bold">Create an Account</h1>
             <p className="mt-2 text-gray-600">
