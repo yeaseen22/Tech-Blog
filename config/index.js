@@ -1,12 +1,9 @@
-import { getCookie, setCookie } from "../utils/cookieUtils";
+import { getCookie } from "../utils/cookieUtils";
 // All API ENDPOINTS will be there..
 // And ALl Headers...
-export const AUTH_API_URL = "https://blog-tech-api.onrender.com/api/v1/auth";
-export const USER_API_URL = "https://blog-tech-api.onrender.com/api/v1/user";
+export const AUTH_API_URL = `${process.env.NEXT_PUBLIC_API_URL}/auth`;
+export const USER_API_URL = `${process.env.NEXT_PUBLIC_API_URL}/user`;
 export const bearerToken = getCookie("authToken");
-console.log(bearerToken, " checking bearer token");
-
-// Geti
 
 // Headers..
 export const headers = {

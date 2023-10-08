@@ -8,7 +8,6 @@ import { bearerToken } from "../config/index";
 export const loginRequest = async (data) => {
   try {
     const login = await Axios.post(`${AUTH_API_URL}/login`, data, { headers });
-    // console.log(login.data);
     return login?.data;
   } catch (e) {
     return e?.response?.data;
@@ -34,7 +33,6 @@ export const registerRequest = async (data) => {
  * Logout Request Action
  */
 export const logoutRequest = async () => {
-  console.log(USER_API_URL);
   try {
     const logout = await Axios.get(`${USER_API_URL}/logout`, {
       headers: {
@@ -43,7 +41,9 @@ export const logoutRequest = async () => {
         Accept: "application/json",
       },
     });
+
     console.log("LOGOUT  --- ", logout);
+
     return logout?.data;
   } catch (e) {
     return e?.response?.data;

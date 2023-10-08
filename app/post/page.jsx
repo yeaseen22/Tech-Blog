@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from 'react';
 import { Button, Input, Select } from '@nextui-org/react';
-import RichTextEditor from './editor';
+import RichTextEditor from '@/components/widgets/Editor/editor';
 
 const PostCreation = () => {
   const [title, setTitle] = useState('');

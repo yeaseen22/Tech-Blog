@@ -108,6 +108,7 @@ export const logoutReducer = (state = { userLogout: {} }, action) => {
     case CLEAR_ERROR:
       return {
         loading: false,
+        success: null,
         userLogout: {},
       };
     default:
