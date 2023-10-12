@@ -10,4 +10,5 @@ export const LOGOUT_REQUEST = "LOGOUT_REQUEST";
 export const LOGOUT_SUCCESS = "LOGOUT SUCCESS";
 export const LOGOUT_FAIL = "LOGOUT_FAIL";
 
+export const AVATOR = "AVATOR";
 export const CLEAR_ERROR = "CLEAR_ERROR";

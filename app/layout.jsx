@@ -1,6 +1,7 @@
 import './globals.css'
 import { Inter } from 'next/font/google';
 import { Providers } from './providers';
+import 'react-toastify/dist/ReactToastify.css';
 // import Footer from '@/components/common/Footer';
 // import Navigation from '@/components/common/Navbar';
 

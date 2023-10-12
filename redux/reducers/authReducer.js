@@ -9,6 +9,7 @@ import {
   LOGOUT_SUCCESS,
   LOGOUT_FAIL,
   CLEAR_ERROR,
+  AVATOR,
 } from "../constants/authConstant";
 
 /**
@@ -67,11 +68,14 @@ export const registerReducer = (state = { userRegister: {} }, action) => {
         message: action.payload?.message,
       };
 
+    case AVATOR:
+      return { ...state, avatar: action.payload.avatar };
+
     case REGISTER_FAIL:
       return {
         loading: false,
-        success: action.payload.success,
-        message: action.payload.message,
+        success: action.payload.success || false,
+        message: action.payload.message || null,
       };
 
     case CLEAR_ERROR:
