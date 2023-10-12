@@ -32,7 +32,7 @@ export default function Navigation() {
   );
 
   const { user } = useSelector((state) => state.user);
-  const { user2 } = useSelector((state) => state.auth);
+  // const { user2 } = useSelector((state) => state.auth);
 
   console.log("user name ", user.name);
   // console.log('avater ',avatar);
@@ -162,8 +162,8 @@ export default function Navigation() {
                 index === 2
                   ? "primary"
                   : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
+                    ? "danger"
+                    : "foreground"
               }
               className="w-full"
               href="#"
