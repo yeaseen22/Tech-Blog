@@ -8,6 +8,7 @@ import {
   LOGOUT_REQUEST,
   LOGOUT_FAIL,
   LOGOUT_SUCCESS,
+  AVATOR,
 } from "../constants/authConstant";
 import { loginRequest, registerRequest, logoutRequest } from "@/API";
 import { deleteCookie, setCookie } from "@/utils/cookieUtils";
@@ -42,6 +43,10 @@ export const registerAction = (userData) => async (dispatch) => {
     dispatch({ type: REGISTER_FAIL, payload: data });
   }
 
+  if (data.avator) {
+    dispatch({ type: AVATOR, payload: data });
+  }
+
   if (data.success) {
     dispatch({ type: REGISTER_SUCCESS, payload: data });
     setCookie("authToken", data?.user?.token, 1);
@@ -50,7 +55,7 @@ export const registerAction = (userData) => async (dispatch) => {
 
 /**
  * Logout Action
- * @returns 
+ * @returns
  */
 export const logoutAction = () => async (dispatch) => {
   dispatch({ type: LOGOUT_REQUEST });

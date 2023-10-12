@@ -22,6 +22,7 @@ export const registerRequest = async (data) => {
     const register = await Axios.post(`${AUTH_API_URL}/register`, data, {
       headers,
     });
+    // console.log(data);
 
     return register?.data;
   } catch (e) {

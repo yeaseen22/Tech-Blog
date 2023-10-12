@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import { getCookie } from "@/utils/cookieUtils";
 import {Button} from "@nextui-org/react";
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 
 
 
@@ -26,7 +26,7 @@ export default function Login() {
 
   useEffect(() => {
     if (user) {
-      toast.success('user already authenticated')
+      // toast.success('user already authenticated')
       router.push("/");
     }
   }, [user]);

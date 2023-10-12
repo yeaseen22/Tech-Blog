@@ -16,11 +16,10 @@ import {
   Avatar,
 } from "@nextui-org/react";
 import Link from "next/link";
-import { getCookie } from '@/utils/cookieUtils';
+import { getCookie } from "@/utils/cookieUtils";
 import { useDispatch, useSelector } from "react-redux";
-import { logoutAction } from '@/redux/actions/authAction';
-import { authCheckerAction } from '@/redux/actions/userAction';
-
+import { logoutAction } from "@/redux/actions/authAction";
+import { authCheckerAction } from "@/redux/actions/userAction";
 
 export default function Navigation() {
   const dispatch = useDispatch();
@@ -28,8 +27,16 @@ export default function Navigation() {
   const userToken = getCookie("authToken");
 
   // const { user } = useSelector((state) => state.authCheck);
-  const { loading: logoutLoading, success: logoutSuccess } = useSelector((state) => state.userLogout);
+  const { loading: logoutLoading, success: logoutSuccess } = useSelector(
+    (state) => state.userLogout
+  );
+
   const { user } = useSelector((state) => state.user);
+  const { user2 } = useSelector((state) => state.auth);
+
+  console.log("user name ", user.name);
+  // console.log('avater ',avatar);
+
 
   const menuItems = [
     "Profile",
@@ -41,6 +48,7 @@ export default function Navigation() {
 
   console.log("User -- ", user);
   console.log("Logout Success -- ", logoutSuccess);
+  // console.log('avator ',avator);
 
   // Define route URLs for login and signup
   const loginRoute = "/login";
@@ -89,61 +97,60 @@ export default function Navigation() {
             News
           </Link>
         </NavbarItem>
-
       </NavbarContent>
 
       {/* ====== NavItems Links for End Naviagtion of Navbar ===== */}
       <NavbarContent justify="end">
-        {
-          !userToken ? (
-            <>
-              <NavbarItem className="hidden lg:flex">
-                {/* Use the router to navigate to the login page */}
-                <Link href={loginRoute}>Login</Link>
-              </NavbarItem>
+        {!userToken ? (
+          <>
+            <NavbarItem className="hidden lg:flex">
+              {/* Use the router to navigate to the login page */}
+              <Link href={loginRoute}>Login</Link>
+            </NavbarItem>
 
-              <NavbarItem>
-                {/* Use the router to navigate to the signup page */}
-                <Button color="primary" variant="flat">
-                  <Link href={signupRoute}>SignUp</Link>
-                </Button>
-              </NavbarItem>
-            </>
-          )
-            :
-            (
-              <>
-                {/* ---- Profile Avatar ---- */}
-                <Dropdown placement="bottom-end">
-                  <DropdownTrigger>
-                    <Avatar
-                      isBordered
-                      as="button"
-                      className="transition-transform"
-                      color="secondary"
-                      name="Jason Hughes"
-                      size="sm"
-                      src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                    />
-                  </DropdownTrigger>
-                  <DropdownMenu aria-label="Profile Actions" variant="flat">
-                    <DropdownItem key="profile" className="h-14 gap-2">
-                      <p className="font-semibold">Signed in as</p>
-                      <p className="font-semibold">zoey@example.com</p>
-                    </DropdownItem>
-                    <DropdownItem key="help_and_feedback">Post Blog</DropdownItem>
-                    <DropdownItem key="settings">My Settings</DropdownItem>
-                    <DropdownItem key="help_and_feedback">Help & Feedback</DropdownItem>
-                    <DropdownItem key="logout" color="danger"
-                      onClick={handleLogout}
-                    >
-                      {!logoutLoading ? 'Log Out' : 'Logging-out..'}
-                    </DropdownItem>
-                  </DropdownMenu>
-                </Dropdown>
-              </>
-            )
-        }
+            <NavbarItem>
+              {/* Use the router to navigate to the signup page */}
+              <Button color="primary" variant="flat">
+                <Link href={signupRoute}>SignUp</Link>
+              </Button>
+            </NavbarItem>
+          </>
+        ) : (
+          <>
+            {/* ---- Profile Avatar ---- */}
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger>
+                <Avatar
+                  isBordered
+                  as="button"
+                  className="transition-transform"
+                  color="secondary"
+                  name="Jason Hughes"
+                  size="sm"
+                  src="https://i.pravatar.cc/150?u=a042581f4e29026704"
+                />
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Profile Actions" variant="flat">
+                <DropdownItem key="profile" className="h-14 gap-2">
+                  <p className="font-semibold">Signed in as</p>
+                  <p className="font-semibold">zoey@example.com</p>
+                </DropdownItem>
+                <DropdownItem key="help_and_feedback">Post Blog</DropdownItem>
+                <DropdownItem key="settings">My Settings</DropdownItem>
+                <DropdownItem key="help_and_feedback">
+                  Help & Feedback
+                </DropdownItem>
+                <DropdownItem
+                  key="logout"
+                  color="danger"
+                  onClick={handleLogout}
+                >
+                  {!logoutLoading ? "Log Out" : "Logging-out.."}
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </>
+        )}
       </NavbarContent>
 
       {/* ===== Mobile Screens Menu ===== */}
@@ -152,7 +159,11 @@ export default function Navigation() {
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 2
+                  ? "primary"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
               }
               className="w-full"
               href="#"

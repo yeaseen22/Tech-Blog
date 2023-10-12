@@ -4,7 +4,6 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { getCookie } from "@/utils/cookieUtils";
 import { useRouter } from "next/navigation";
 import { Button } from "@nextui-org/react";
@@ -18,18 +17,20 @@ export default function Register() {
     name: "",
     email: "",
     password: "",
+    avatar: null
   });
 
-  const { loading, message, success } = useSelector(
+  const { loading, message, success, avatar } = useSelector(
     (state) => state.userRegister
   );
+
   const user = getCookie("authToken");
 
   useEffect(() => {
     if (user) {
-      toast.success("User already Authenticated");
+      router("/");
     }
-  }, [user]);
+  }, []);
 
   useEffect(() => {
     if (!success && message) {
@@ -52,7 +53,24 @@ export default function Register() {
   const handleSubmitRegister = (event) => {
     event.preventDefault();
     dispatch(registerAction(data));
+    console.log(data);
   };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+  
+    if (file) {
+      const reader = new FileReader();
+  
+      reader.onload = (e) => {
+        setData({ ...data, avatar: e.target.result });
+      };
+  
+      reader.readAsDataURL(file);
+    }
+  };
+  
+
   return (
     <div className="flex flex-col md:flex-row items-center md:h-screen bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500">
       {/* Background Color Container */}
@@ -81,10 +99,12 @@ export default function Register() {
               </label>
               <input
                 id="name"
+                name="name"
                 type="text"
                 placeholder="Enter your full name"
                 className="w-full px-4 py-3 mt-1 border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                 required
+                value={data.name}
                 onChange={handleChange}
               />
             </div>
@@ -94,10 +114,12 @@ export default function Register() {
               </label>
               <input
                 id="email"
+                name="email"
                 type="email"
                 placeholder="Enter your email"
                 className="w-full px-4 py-3 mt-1 border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                 required
+                value={data.email}
                 onChange={handleChange}
               />
             </div>
@@ -110,13 +132,38 @@ export default function Register() {
               </label>
               <input
                 id="password"
+                name="password"
                 type="password"
+                value={data.password}
                 placeholder="Enter your password"
                 className="w-full px-4 py-3 mt-1 border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
                 required
                 onChange={handleChange}
               />
             </div>
+            <div>
+              <label htmlFor="avatar" className="block font-bold text-gray-700">
+                Avatar
+              </label>
+              <input
+                id="avatar"
+                name="avatar"
+                type="file"
+                className="w-full px-4 py-3 mt-1 border-gray-300 rounded-md focus:border-indigo-500 focus:ring focus:ring-indigo-200"
+                accept="image/*"
+                onChange={handleImageChange}
+              />
+              {avatar && (
+                <div className="mt-2">
+                  <img
+                    src={avatar}
+                    alt="Avatar Preview"
+                    className="max-w-sm max-h-40"
+                  />
+                </div>
+              )}
+            </div>
+
             <div>
               {/* <button
                 type="submit"
